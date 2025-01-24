@@ -24,6 +24,7 @@ PROGFILES=$(addprefix $(BINDIR),$(_PROGS))
 all: $(PROGFILES)
 
 $(BINDIR)%: $(SRCDIR)%.c
+	@if [ ! -d $(BINDIR) ]; then mkdir -p $(BINDIR); fi
 	$(CC) $(INC) $< $(CFLAGS) -o $@ $(LIBS)
 
 clean:

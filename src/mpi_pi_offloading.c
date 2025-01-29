@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <mpi.h>
+#include "mpi.h"
 #include <omp.h>
 #include <stdlib.h>
 #include <time.h>
@@ -26,10 +26,10 @@ int main(int argc, char *argv[]) {
     long int passos_cpu = num_passos - passos_gpu;
     inicio = omp_get_wtime(); // Tempo de início da execução
     // Offloading com OpenMP para a GPU - Master thread
-#pragma omp parallel num_threads(8)
+    #pragma omp parallel num_threads(9)
     {
         // Thread master para comunicação e offloading para a GPU
-        #pragma omp master
+        #pragma omp master nowait
         #pragma omp target data map(tofrom:gpu_contagem_local) device(1)
         #pragma omp target teams distribute parallel for nowait reduction(+:gpu_contagem_local)
             for (long int i = ranque; i < passos_gpu; i += numprocs) {

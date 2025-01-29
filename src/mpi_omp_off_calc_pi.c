@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
     soma += 4.0 / (1.0 + x * x);
   }
   // MPI_Reduce para somar os resultados de todos os processos MPI
-  printf("Processo %d Redução %f \n", ranque, soma);
   MPI_Reduce(&soma, &soma_global, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
   if (ranque == 0) {
     pi = passo * soma_global; // Só o processo 0 calcula o valor final de Pi

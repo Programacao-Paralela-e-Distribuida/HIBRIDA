@@ -55,12 +55,10 @@ int main(int argc, char *argv[]) {
         }
           // Tarefa 1: Processamento na CPU
         #pragma omp task shared(num_primes_cpu, rank, n)
-        {
         #pragma omp parallel for reduction(+:num_primes_cpu) num_threads(4)
             for (long int j = gpu_end+(rank*2)+1; j <= n; j += salto) {
                 if (is_prime(j)) num_primes_cpu++;
             }
-        }
         }
     }
     long int local_num_primes = num_primes_gpu + num_primes_cpu;
@@ -72,7 +70,6 @@ int main(int argc, char *argv[]) {
         printf("Total de primos até %ld: %ld\n", n, global_num_primes);
         printf("Calculado em %lf segundos\n", end_time - start_time);
     }
-
     MPI_Finalize();
     return 0;
 }

@@ -10,7 +10,7 @@ bool is_prime(long int n) {
     return true;
 }
 int main(int argc, char *argv[]) {
-    long int N, total_primes=0;
+long int N, total_primes=0;
     if (argc < 2) {
         printf("Valor inválido! Entre com o valor do maior inteiro\n");
         return 0;
@@ -18,11 +18,8 @@ int main(int argc, char *argv[]) {
         N = strtol(argv[1], (char **) NULL, 10);
     }
     // Calcula só para os números ímpares, começando com 3
-    for (int i = 3; i <= N ; i+=2) {
-         if (is_prime(i)) {
-             total_primes++;
-         }
-    }
+    for (int i = 3; i <= N ; i+=2) 
+         if (is_prime(i)) total_primes++;
     total_primes++;  // O número 2 também é primo
     // Imprime os resultados
     printf("Total de números primos entre 1 e %ld: %ld\n", N, total_primes);

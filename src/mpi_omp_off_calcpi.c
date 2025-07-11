@@ -5,7 +5,7 @@
 #include <time.h>
 // Defina a proporção da carga de trabalho para a GPU (em %)
 #define GPU_WORKLOAD 70
-static long num_passos = 10000000000; // Número total de pontos aleatórios
+static long int num_passos = 1000000000 ; // Número total de pontos aleatórios
 int main(int argc, char *argv[]) {
     long int gpu_contagem_local = 0, cpu_contagem_local = 0, contagem_global = 0;
     int ranque, numprocs, provided;
@@ -26,24 +26,24 @@ int main(int argc, char *argv[]) {
     long int passos_cpu = num_passos - passos_gpu;
     inicio = omp_get_wtime(); // Tempo de início da execução
     // Offloading com OpenMP para a GPU - Master thread
-    #pragma omp parallel num_threads(9)
+    #pragma omp parallel num_threads(5)
     {
         // Thread master para comunicação e offloading para a GPU
-        #pragma omp master nowait
-        #pragma omp target data map(tofrom:gpu_contagem_local) device(1)
-        #pragma omp target teams distribute parallel for nowait reduction(+:gpu_contagem_local)
+        #pragma omp master
+        #pragma omp target data map(tofrom:gpu_contagem_local) map(alloc:x,y,z) device(1)
+        #pragma omp target teams distribute parallel for reduction(+:gpu_contagem_local) nowait 
             for (long int i = ranque; i < passos_gpu; i += numprocs) {
-                x = (double)rand() / RAND_MAX;
-                y = (double)rand() / RAND_MAX;
-                z = x * x + y * y;
+                double x = (double)rand() / RAND_MAX;
+                double y = (double)rand() / RAND_MAX;
+                double z = x * x + y * y;
                 if (z <= 1.0) gpu_contagem_local++; // Verifica se o ponto está no círculo
             }
             // Threads secundárias para execução no CPU
         #pragma omp for reduction(+:cpu_contagem_local)
             for (long int i = ranque; i < passos_cpu; i += numprocs) {
-                x = (double)rand() / RAND_MAX;
-                y = (double)rand() / RAND_MAX;
-                z = x * x + y * y;
+                double x = (double)rand() / RAND_MAX;
+                double y = (double)rand() / RAND_MAX;
+                double z = x * x + y * y;
                 if (z <= 1.0) cpu_contagem_local++;
             }
     }

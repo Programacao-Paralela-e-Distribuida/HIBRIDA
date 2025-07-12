@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {  /* mpi_omp_calcpi.c */
   double pi = passo * soma_global;
   if (meu_ranque == 0) { // Processo 0 calcula o valor final de Pi
       fim = MPI_Wtime();
-      printf("Valor calcula de Pi: %2.15f em %lf segundos\n", pi, fim-inicio);
+      printf("Valor calculado de Pi: %2.15f em %lf segundos\n", pi, fim-inicio);
   }
   MPI_Finalize(); // Finaliza o MPI
   return 0;

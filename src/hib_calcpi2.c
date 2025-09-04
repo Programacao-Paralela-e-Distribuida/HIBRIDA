@@ -3,7 +3,7 @@
 #include <omp.h>
 const long num_passos = 10000000000;
 
-int main(int argc, char *argv[]) {   /* mpi_off_calcpi.c */
+int main(int argc, char *argv[]) {   /* hib_calcpi2.c */
   int meu_ranque, num_procs, fornecido;
   double soma = 0.0, soma_global = 0.0;
   double passo = 1.0 / (double)num_passos;
@@ -21,8 +21,7 @@ int main(int argc, char *argv[]) {   /* mpi_off_calcpi.c */
   // Início da execução
   inicio = omp_get_wtime(); 
   // Offloading com OpenMP para o acelerador (GPU)
-  #pragma omp target data map(tofrom:soma) map(to:num_procs, num_passos, meu_ran
-que, passo) device(1)
+  #pragma omp target data map(tofrom:soma) map(to:num_procs, num_passos, meu_ranque, passo) device(1)
   #pragma omp target teams distribute parallel for reduction(+:soma)
   // Saltos de acordo com o número de processos (MPI)
   for (long int i = meu_ranque; i < num_passos; i += num_procs) { 

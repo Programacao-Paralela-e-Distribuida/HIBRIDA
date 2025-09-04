@@ -3,7 +3,7 @@
 #include <omp.h>
 const long num_passos = 10000000000;
 
-int main(int argc, char *argv[]) { /* mpi_omp_off_calcpi.c */
+int main(int argc, char *argv[]) { /* hib_calcpi3.c */
   int meu_ranque, num_procs, fornecido;
   double soma_local = 0.0, soma_global = 0.0;
   double inicio, fim, soma_cpu = 0.0, soma_gpu = 0.0;
@@ -29,8 +29,7 @@ int main(int argc, char *argv[]) { /* mpi_omp_off_calcpi.c */
       // Thread master para comunicação e offloading para a GPU
       #pragma omp master 
       #pragma omp target data map(tofrom:soma_gpu) map(to:split_point) device(1)
-      #pragma omp target teams distribute parallel for nowait reduction(+:soma_g
-pu)
+      #pragma omp target teams distribute parallel for nowait reduction(+:soma_gpu)
       // Saltos de acordo com o número de processos (MPI)
       for (long int i = meu_ranque; i <= split_point; i += num_procs) { 
            double x = (i + 0.5) * passo;
@@ -38,8 +37,7 @@ pu)
       }
       // Threads secundárias para execução na CPU
       #pragma omp for reduction(+:soma_cpu)
-      for (long int i = split_point+(meu_ranque+1); i < num_passos; i += num_pro
-cs) { 
+      for (long int i = split_point+(meu_ranque+1); i < num_passos; i += num_procs) { 
            double x = (i + 0.5) * passo;
            soma_cpu += 4.0 / (1.0 + x * x);
       }
@@ -47,8 +45,7 @@ cs) {
   // Calcula o valor local do processo
   soma_local = soma_gpu + soma_cpu;
   // MPI_Reduce soma os resultados parciais dos processos MPI
-  MPI_Reduce(&soma_local, &soma_global, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORL
-D);
+  MPI_Reduce(&soma_local, &soma_global, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
   double pi = passo * soma_global; 
   // Processo raiz (0) finaliza e imprime os resultadr]os
   if (meu_ranque == 0) {     

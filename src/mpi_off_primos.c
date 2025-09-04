@@ -37,7 +37,6 @@ int main(int argc, char *argv[]) {
         gpu_end--; // Se for ímpar, subtrai 1 para tornar par
     }
     salto = numprocs*2;
-
     start_time = omp_get_wtime();
 
     #pragma omp parallel

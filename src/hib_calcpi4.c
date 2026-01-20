@@ -13,7 +13,7 @@ int thr_status;
   MPI_Init_thread(&argc, &argv, MPI_THREAD_FUNNELED, &thr_status);
   if (thr_status != MPI_THREAD_FUNNELED) {
       printf("Erro ao iniciar no modo MPI_THREAD_FUNNELED\n");
-      exit(-1);
+      return(-1);
   }
   MPI_Comm_rank(MPI_COMM_WORLD, &ranque);
   MPI_Comm_size(MPI_COMM_WORLD, &num_procs);

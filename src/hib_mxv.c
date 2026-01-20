@@ -14,7 +14,7 @@ register double temp;
        c[i] = temp;
    }
 }
-int main(int argc, char *argv[]) { /* mpi_mxv.c  */
+int main(int argc, char *argv[]) { /* hib_mxv.c  */
 double *Aloc, *b,*cloc, *c;
 /* matriz m x n por um vetor de dimensão n */
 long int i, j, m, n;

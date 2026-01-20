@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <omp.h>
 #include <math.h>
-int main() {
+int main() {   /* omp_calcpi.c */
   static long num_passos = 10000000000;
   double passo = 1.0 / (double) num_passos;
   double soma = 0.0, pi = 0.0, inicio, fim;

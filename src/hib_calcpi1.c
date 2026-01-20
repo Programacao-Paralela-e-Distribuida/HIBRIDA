@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <mpi.h>
 const long num_passos = 10000000000;
-int main(int argc, char *argv[]) {  /* mpi_omp_calcpi.c */
+int main(int argc, char *argv[]) {  /* hib_calcpi1.c */
   int meu_ranque, num_procs, fornecido;
   double soma = 0.0, soma_global = 0.0;
   double inicio, fim;

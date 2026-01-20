@@ -11,7 +11,7 @@ bool is_prime(long int n) {
         if (n % i == 0 || n % (i + 2) == 0) return false;
     return true;
 }
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) { /* hib_primos2.c */
 int N, total_primes;
 int fornecido, ranque, num_procs;
     if (argc < 2) {
@@ -43,7 +43,6 @@ int fornecido, ranque, num_procs;
                  if (is_prime(i)) 
                     local_primes_cpu++;
             }
-
             // Tarefa 2: Processamento na GPU
             #pragma omp task shared(local_primes_gpu, split_point)
             #pragma omp target teams distribute parallel for reduction(+:local_primes_gpu) map(tofrom: local_primes_gpu)

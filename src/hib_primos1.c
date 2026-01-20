@@ -15,10 +15,10 @@ int is_prime(long int n) {
 }
 #define GPU_WORKLOAD 70
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) { /* hib_primos1.c */
     int numprocs, rank, salto;
     long int num_primes_gpu = 0, num_primes_cpu = 0, global_num_primes = 0;
-    long int  n, i, gpu_end;
+    long int  n, gpu_end;
     double start_time, end_time;
 
     MPI_Init(&argc, &argv);

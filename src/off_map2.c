@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <omp.h>
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[]) /* off_map2.c */
 {
   int N = 10;
   int a[N], c[N];

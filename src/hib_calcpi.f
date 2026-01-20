@@ -1,5 +1,5 @@
 
-program mpi_omp_calc_pi
+program hib_calcpi 
   use mpi
   implicit none
   integer :: num_steps, rank, numprocs, provided, ierr
@@ -40,5 +40,5 @@ program mpi_omp_calc_pi
   end if
 
   call MPI_Finalize(ierr)
-end program mpi_omp_calc_pi
+end program hib_calcpi
 

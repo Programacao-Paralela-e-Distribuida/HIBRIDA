@@ -2,7 +2,7 @@
 #include <omp.h>
 //  Use este programa para verificar se as opções de compilação estão corretas 
 //  e a(s) GPUS(s) conseguem ser identificadas.
-int main() {
+int main() {  /* test_device.c */
   #pragma omp target device(1)
   {
   int numdevices = omp_get_num_devices();

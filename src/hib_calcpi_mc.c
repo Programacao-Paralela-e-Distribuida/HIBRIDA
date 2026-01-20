@@ -9,7 +9,7 @@
 
 static long num_trials = 10000000000; // Número total de pontos aleatórios
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[]) /* hib_calcpi_mc.c */
 {
     long int i, local_count_gpu = 0, local_count_cpu = 0, global_count = 0;
     int rank, size, provided;

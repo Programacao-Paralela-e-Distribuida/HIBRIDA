@@ -3,7 +3,7 @@
 #include <mpi.h> 
 #include <omp.h> 
 
-int main(int argc, char *argv[] ) {
+int main(int argc, char *argv[] ) {  /* hib_calcpi4.c */
 static long num_passos = 10000000000;
 double passo = 1.0 / (double) num_passos;
 double soma=0.0, pi = 0.0, soma_global = 0.0, inicio, fim;

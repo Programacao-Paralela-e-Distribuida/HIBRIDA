@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <mpi.h>
-int main(int argc, char *argv[])  /* mpi_level.c */
+int main(int argc, char *argv[])  /* hib_nivel.c */
 {
   int fornecido;
   MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE,&fornecido);

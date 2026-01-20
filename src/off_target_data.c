@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <omp.h>
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[])  /* off_target_data.c */
 {
   int N = 100;
   double A[N], B[N];

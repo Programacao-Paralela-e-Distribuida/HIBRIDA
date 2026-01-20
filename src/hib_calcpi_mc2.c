@@ -3,7 +3,7 @@
 #include <omp.h>
 static long num_steps = 10000000000;
 double step;
-int main(int argc, char *argv[])
+int main(int argc, char *argv[])   /* hib_calcpi_mc2.c */
 {
   long int i;
   int rank, size, provided;

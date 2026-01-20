@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <omp.h>
 #include <math.h>
-int main() {
+int main() {  /* off_calcpi.c */
   long int num_passos = 10000000000; // Número de passos para a integração
   double passo = 1.0 / (double) num_passos;
   double pi = 0.0, inicio, fim;
